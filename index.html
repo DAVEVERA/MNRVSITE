@@ -172,18 +172,33 @@
     <!-- ============================================
      BOOT SEQUENCE OVERLAY
      ============================================ -->
-    <div id="boot-overlay">
+    <div id="boot-overlay" onclick="skipBoot()">
       <video
         id="boot-video"
         autoplay
         muted
+        playsinline
         src="assets/Windows%2095%20Boot%20sequence.mp4"
       ></video>
 
-      <button id="boot-skip" onclick="skipBoot()">
-        Druk op ESC om over te slaan
+      <button id="boot-skip" onclick="skipBoot(event)">
+        Klik hier of druk op ESC om over te slaan
       </button>
     </div>
+    <script>
+      // Define skipBoot immediately so early clicks don't throw an error
+      window.earlyBootSkipped = false;
+      window.skipBoot = function(e) {
+        if(e) e.stopPropagation();
+        window.earlyBootSkipped = true;
+        var overlay = document.getElementById("boot-overlay");
+        if(overlay) {
+          overlay.style.display = "none";
+          overlay.style.opacity = "0";
+          overlay.style.pointerEvents = "none";
+        }
+      };
+    </script>
 
     <div class="desktop booting">
       <!-- ============================================
@@ -990,8 +1005,8 @@
         var video = document.getElementById("boot-video");
         var bootSkipped = false;
 
-        // Check sessionStorage - only boot once per session
-        if (sessionStorage.getItem("mnrv-booted")) {
+        // Check sessionStorage or early click
+        if (sessionStorage.getItem("mnrv-booted") || window.earlyBootSkipped) {
           finishBoot(true);
           return;
         }
@@ -1022,6 +1037,8 @@
 
         // ---- Finish / Fade Out ----
         function finishBoot(instant) {
+          if (bootSkipped) return;
+          
           sessionStorage.setItem("mnrv-booted", "1");
           bootSkipped = true;
 
