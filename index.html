@@ -1049,6 +1049,11 @@
         window.skipBoot = function () {
           finishBoot(false);
         };
+
+        // Ultimate fallback: forcefully remove it after 10 seconds just in case
+        setTimeout(function() {
+          if (!bootSkipped) finishBoot(true);
+        }, 10000);
       })();
     </script>
 

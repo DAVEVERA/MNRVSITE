@@ -1852,7 +1852,10 @@ a {
       overflow: hidden;
     }
     #boot-overlay.done {
-      display: none;
+      display: none !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
     }
     #boot-video {
       width: 100%;
