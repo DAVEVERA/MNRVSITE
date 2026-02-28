@@ -284,83 +284,50 @@
       </div>
 
       <!-- ============================================
-       ABOUT MNRV WINDOW (IE-style)
+       ABOUT MNRV WINDOW (Modern)
        ============================================ -->
       <div
         id="about-window"
-        class="win-window hidden w-500 h-400 position-custom-about"
+        class="modern-window hidden w-600 h-500 position-custom-about"
       >
-        <div class="win-titlebar">
-          <img
-            class="win-titlebar-icon"
-            src="assets/icons/w98_MSIE1_16x16_4.png"
-            alt="IE"
-            draggable="false"
-          />
-          <span class="win-titlebar-title">Over MNRV - Internet Explorer</span>
-          <div class="win-titlebar-buttons">
-            <button class="win-titlebar-btn min-btn" title="Minimaliseren">
-              _
+        <div class="modern-titlebar">
+          <div class="modern-titlebar-left">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path>
+            </svg>
+            <span class="modern-titlebar-title">Over MNRV</span>
+          </div>
+          <div class="modern-titlebar-controls">
+            <button class="modern-title-btn min" title="Minimaliseren">
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             </button>
-            <button class="win-titlebar-btn max-btn" title="Maximaliseren">
-              &#9633;
+            <button class="modern-title-btn max" title="Maximaliseren">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
             </button>
-            <button class="win-titlebar-btn close-btn" title="Sluiten">
-              X
+            <button class="modern-title-btn close" title="Sluiten" onclick="MNRV.closeWindow('about-window')">
+              <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
         </div>
-        <div class="win-addressbar">
-          <label>Adres:</label>
-          <input
-            type="text"
-            value="https://www.mnrv.ai/over-ons"
-            readonly
-            class="win-input"
-            title="Over ons adres"
-            placeholder="Adres"
-          />
-        </div>
-        <div class="win-body p-0">
-          <div class="ie-page-content p-16">
-            <div class="text-center mb-12">
-              <img src="mnrv logo.png" alt="MNRV" class="w-150 max-w-full" />
-            </div>
-            <h1>MNRV &mdash; De Toekomst van AI</h1>
-            <hr />
-            <h2>Wie zijn wij?</h2>
-            <p>
-              MNRV is een innovatief web- en app-bureau dat gespecialiseerd is
-              in het combineren van AI-tools en agents met webshops. Wij helpen
-              bedrijven hun online platform naar het volgende niveau te tillen
-              door slimme technologie te integreren in elke stap van de
-              klantreis.
-            </p>
-
-            <h2>Wat doen wij?</h2>
-            <p>
-              Van AI-gedreven productaanbevelingen tot intelligente chatbots,
-              van gepersonaliseerde UX tot geautomatiseerde workflows &mdash;
-              wij bouwen de webshops van morgen, vandaag.
-            </p>
-
-            <h2>Onze missie</h2>
-            <p>
-              Wij geloven dat de combinatie van mens en machine de sleutel is
-              tot uitzonderlijke klantbeleving. Door AI naadloos te integreren
-              in e-commerce platforms, creeren wij digitale ervaringen die
-              converteren, verrassen en binden.
-            </p>
-
-            <hr />
-            <p class="text-center fs-10 text-darkgray">
-              &copy; 2026 MNRV - Alle rechten voorbehouden
-            </p>
+        <div class="modern-body about-dialog-body">
+          <div class="about-dialog-logo-wrap">
+            <img src="mnrv logo.png" alt="MNRV" class="about-dialog-logo" />
           </div>
-        </div>
-        <div class="win-statusbar">
-          <span class="win-statusbar-section">Gereed</span>
-          <span class="win-statusbar-section">Internet</span>
+          <h1 class="modern-h1 about-dialog-h1">MNRV <br><span class="modern-gradient-text">De Toekomst van AI</span></h1>
+          
+          <h2 class="modern-label modern-label-blue about-dialog-h2">Wie zijn wij?</h2>
+          <p class="modern-p about-dialog-p">
+            MNRV is een innovatief web- en app-bureau dat gespecialiseerd is in het combineren van AI-tools en agents met webshops. Wij helpen bedrijven hun online platform naar het volgende niveau te tillen door slimme technologie te integreren in elke stap van de klantreis.
+          </p>
+
+          <h2 class="modern-label modern-label-purple about-dialog-h2">Onze missie</h2>
+          <p class="modern-p about-dialog-p">
+            Wij geloven dat de combinatie van mens en machine de sleutel is tot uitzonderlijke klantbeleving. Door AI naadloos te integreren in e-commerce platforms, creëren wij digitale ervaringen die converteren, verrassen en binden.
+          </p>
+          
+          <div class="about-dialog-footer">
+            <p class="modern-p about-dialog-copyright">&copy; 2026 MNRV - Alle rechten voorbehouden</p>
+          </div>
         </div>
       </div>
 
@@ -419,150 +386,75 @@
       </div>
 
       <!-- ============================================
-       WORD 95 WINDOW
+       WORD WINDOW (Modern Editor)
        ============================================ -->
       <div
         id="word-window"
-        class="win-window hidden w-620 h-460 position-custom-word"
+        class="modern-window hidden w-700 h-500 position-custom-word"
       >
-        <div class="win-titlebar">
-          <img
-            class="win-titlebar-icon"
-            src="assets/icons/w98_WriteWordpad_16x16_4.png"
-            alt="Word"
-            draggable="false"
-          />
-          <span class="win-titlebar-title">Microsoft Word - Document1</span>
-          <div class="win-titlebar-buttons">
-            <button class="win-titlebar-btn min-btn" title="Minimaliseren">
-              _
+        <div class="modern-titlebar">
+          <div class="modern-titlebar-left">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+            <span class="modern-titlebar-title">MNRV Editor — Document 1</span>
+          </div>
+          <div class="modern-titlebar-controls">
+            <button class="modern-title-btn min" title="Minimaliseren">
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             </button>
-            <button class="win-titlebar-btn max-btn" title="Maximaliseren">
-              &#9633;
+            <button class="modern-title-btn max" title="Maximaliseren">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
             </button>
-            <button class="win-titlebar-btn close-btn" title="Sluiten">
-              X
+            <button class="modern-title-btn close" title="Sluiten" onclick="MNRV.closeWindow('word-window')">
+              <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
         </div>
-        <!-- Menu bar -->
-        <div class="word-menubar">
-          <span class="word-menu-item">Bestand</span>
-          <span class="word-menu-item">Bewerken</span>
-          <span class="word-menu-item">Beeld</span>
-          <span class="word-menu-item word-menu-insert" id="word-insert-menu"
-            >Invoegen</span
-          >
-          <span class="word-menu-item">Opmaak</span>
-          <span class="word-menu-item">Extra</span>
-          <span class="word-menu-item">Help</span>
-        </div>
-        <!-- Toolbar -->
-        <div class="word-toolbar">
-          <button
-            class="word-tb-btn"
-            title="Nieuw"
-            onclick="document.getElementById('word-doc').innerHTML = ''"
-          >
-            &#128196;
+        
+        <!-- Modern Toolbar -->
+        <div class="word-modern-toolbar">
+          <button class="modern-social-btn word-btn-icon" title="Nieuw" onclick="document.getElementById('word-doc').innerHTML = ''">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
           </button>
-          <span class="word-tb-sep"></span>
-          <button
-            class="word-tb-btn"
-            title="Vet"
-            onclick="document.execCommand('bold')"
-          >
-            <b>B</b>
+          <div class="word-tb-sep"></div>
+          <button class="modern-social-btn word-btn-bold" title="Vet" onclick="document.execCommand('bold')">B</button>
+          <button class="modern-social-btn word-btn-italic" title="Cursief" onclick="document.execCommand('italic')">I</button>
+          <button class="modern-social-btn word-btn-underline" title="Onderstreept" onclick="document.execCommand('underline')">U</button>
+          <div class="word-tb-sep"></div>
+          <button class="modern-social-btn word-btn-align" title="Links" onclick="document.execCommand('justifyLeft')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="17" y1="10" x2="3" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="17" y1="18" x2="3" y2="18"></line></svg>
           </button>
-          <button
-            class="word-tb-btn"
-            title="Cursief"
-            onclick="document.execCommand('italic')"
-          >
-            <i>I</i>
+          <button class="modern-social-btn word-btn-align" title="Midden" onclick="document.execCommand('justifyCenter')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="10" x2="6" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="18" y1="18" x2="6" y2="18"></line></svg>
           </button>
-          <button
-            class="word-tb-btn"
-            title="Onderstreept"
-            onclick="document.execCommand('underline')"
-          >
-            <u>U</u>
+          <button class="modern-social-btn word-btn-align" title="Rechts" onclick="document.execCommand('justifyRight')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="7" y2="10"></line><line x1="21" y1="6" x2="3" y2="6"></line><line x1="21" y1="14" x2="3" y2="14"></line><line x1="21" y1="18" x2="7" y2="18"></line></svg>
           </button>
-          <span class="word-tb-sep"></span>
-          <button
-            class="word-tb-btn"
-            title="Links"
-            onclick="document.execCommand('justifyLeft')"
-          >
-            &#9776;
-          </button>
-          <button
-            class="word-tb-btn"
-            title="Midden"
-            onclick="document.execCommand('justifyCenter')"
-          >
-            &#9776;
-          </button>
-          <button
-            class="word-tb-btn"
-            title="Rechts"
-            onclick="document.execCommand('justifyRight')"
-          >
-            &#9776;
-          </button>
-          <span class="word-tb-sep"></span>
-          <select
-            class="word-font-select"
-            onchange="document.execCommand('fontName', false, this.value)"
-            title="Lettertype"
-          >
-            <option>Times New Roman</option>
-            <option>Arial</option>
-            <option>Comic Sans MS</option>
-            <option>Courier New</option>
-            <option>Impact</option>
-            <option>Tahoma</option>
+          <div class="word-tb-sep"></div>
+          <select class="modern-input word-font-select" onchange="document.execCommand('fontName', false, this.value)" title="Lettertype">
+            <option value="Inter">Inter</option>
+            <option value="Arial" class="word-font-opt-black">Arial</option>
+            <option value="Courier New" class="word-font-opt-black">Courier</option>
+            <option value="Times New Roman" class="word-font-opt-black">Serif</option>
           </select>
-          <select
-            class="word-size-select"
-            onchange="document.execCommand('fontSize', false, this.value)"
-            title="Tekstgrootte"
-          >
-            <option value="2">10</option>
-            <option value="3" selected>12</option>
-            <option value="4">14</option>
-            <option value="5">18</option>
-            <option value="6">24</option>
-            <option value="7">36</option>
-          </select>
-          <span class="word-tb-sep"></span>
-          <button
-            class="word-tb-btn word-tb-wordart"
-            id="word-wordart-btn"
-            title="WordArt invoegen"
-          >
-            <span class="word-tb-wordart-icon">A</span>
-          </button>
+          <button class="modern-social-btn word-tb-wordart" id="word-wordart-btn" title="Genereer AI Tekst">A</button>
         </div>
+
         <!-- Document area -->
-        <div class="word-doc-area">
-          <div class="word-ruler">
-            <span>1</span><span>2</span><span>3</span><span>4</span
-            ><span>5</span><span>6</span><span>7</span><span>8</span
-            ><span>9</span><span>10</span>
-          </div>
-          <div id="word-doc" class="word-doc" contenteditable="true">
-            <p>
-              Welkom bij Word 95! Typ hier je document of voeg WordArt in via de
-              knop hierboven.
-            </p>
+        <div class="modern-body word-body-wrap">
+          <div id="word-doc" class="modern-p word-doc-area" contenteditable="true">
+            <p>Welkom bij MNRV Editor. Typ hier je briljante ideeën of gebruik de 'A' knop om creatieve WordArt te genereren.</p>
           </div>
         </div>
-        <div class="win-statusbar">
-          <span class="win-statusbar-section">Pagina 1</span>
-          <span class="win-statusbar-section">Sec 1</span>
-          <span class="win-statusbar-section">1/1</span>
-          <span class="win-statusbar-section">Nederlands</span>
+        
+        <div class="word-status-bar">
+          <span>Document 1</span>
+          <span>100% | UTF-8</span>
         </div>
       </div>
 
@@ -571,34 +463,39 @@
        ============================================ -->
       <div
         id="wordart-dialog"
-        class="win-window win-dialog hidden w-480 position-center"
+        class="modern-window hidden w-480 position-center wordart-modern-dialog"
       >
-        <div class="win-titlebar">
-          <span class="win-titlebar-title">WordArt Galerie</span>
-          <div class="win-titlebar-buttons">
-            <button class="win-titlebar-btn close-btn" title="Sluiten">
-              X
+        <div class="modern-titlebar">
+          <div class="modern-titlebar-left">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#a78bfa" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            <span class="modern-titlebar-title">AI WordArt Generator</span>
+          </div>
+          <div class="modern-titlebar-controls">
+            <button class="modern-title-btn close" title="Sluiten" onclick="MNRV.hideWindow('wordart-dialog')">
+              <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
           </div>
         </div>
-        <div class="wordart-dialog-body">
-          <p class="wordart-dialog-label">Selecteer een WordArt-stijl:</p>
-          <div class="wordart-gallery" id="wordart-gallery"></div>
-          <div class="wordart-text-input">
-            <label>Je tekst hier:</label>
+        <div class="modern-body wordart-modern-body">
+          <p class="modern-label modern-label-blue wordact-mb-12 wordact-fs-13">Selecteer een stijl:</p>
+          <div class="wordart-modern-gallery" id="wordart-gallery"></div>
+          
+          <div class="wordact-mb-20">
+            <label class="modern-label wordart-modern-label">Jouw Tekst:</label>
             <input
               type="text"
               id="wordart-text"
-              class="win-input w-full"
+              class="modern-input"
               value="MNRV"
-              title="WordArt tekst"
-              placeholder="Tekst"
+              placeholder="Typ je tekst..."
             />
           </div>
-          <div class="wordart-preview" id="wordart-preview"></div>
-          <div class="dialog-buttons pt-8">
-            <button class="win-btn win-btn-default" id="wordart-ok">OK</button>
-            <button class="win-btn" id="wordart-cancel">Annuleren</button>
+          
+          <div class="wordart-modern-preview" id="wordart-preview"></div>
+          
+          <div class="wordart-modern-btns">
+            <button class="modern-btn-primary modern-btn-secondary wordart-modern-btn" id="wordart-cancel">Annuleren</button>
+            <button class="modern-btn-primary wordart-modern-btn" id="wordart-ok">Invoegen</button>
           </div>
         </div>
       </div>
