@@ -58,31 +58,83 @@
     .qty-btn { background: rgba(255,255,255,0.1); border: none; color: #fff; width: 28px; height: 28px; border-radius: 4px; cursor: pointer; }
     .cart-item-remove { background: rgba(239,68,68,0.2); color: #ef4444; border: none; width: 32px; height: 32px; border-radius: 4px; cursor: pointer; }
 
+    /* Enforce Win95 Flat styling locally */
+    .shop-filter-bar-modern, .filter-btn-modern, .shop-search-modern input, 
+    .product-card, .product-img, .product-badge, .product-tag, .product-actions button, 
+    .product-actions a, .modern-cart-btn, .shop-toast, .qty-btn, .cart-item-remove, .btn-secondary, .btn-primary {
+      border-radius: 0 !important;
+    }
+    .product-card {
+      background: #ffffff !important;
+      border: 1px solid #000 !important;
+      box-shadow: 2px 2px 0 0 #000 !important;
+      color: #000 !important;
+    }
+    .product-card:hover {
+      transform: none !important;
+      border-color: #008080 !important;
+      box-shadow: 2px 2px 0 0 #008080 !important;
+    }
+    .product-name, .product-price {
+      color: #000 !important;
+    }
+    .product-description, .filter-btn-modern {
+      color: #333 !important;
+    }
+    .shop-filter-bar-modern, .product-img {
+      background: #f0f0f0 !important;
+      border: 1px solid #000 !important;
+    }
+    .filter-btn-modern {
+      background: #c0c0c0 !important;
+      border: 1px outset #fff !important;
+      color: #000 !important;
+    }
+    .filter-btn-modern.active {
+      background: #008080 !important;
+      color: #fff !important;
+      border: 1px inset #000 !important;
+    }
+    .product-actions button, .product-actions a, .modern-cart-btn {
+      background: #c0c0c0 !important;
+      border: 1px outset #fff !important;
+      color: #000 !important;
+    }
+    .product-actions button:hover, .product-actions a:hover, .modern-cart-btn:hover {
+      background: #c0c0c0 !important;
+      filter: none !important;
+    }
+    .product-actions button:active, .product-actions a:active, .modern-cart-btn:active, .qty-btn:active, .cart-item-remove:active {
+      border: 1px inset #000 !important;
+    }
+    .shop-search-modern input {
+      background: #fff !important;
+      border: 1px inset #000 !important;
+      color: #000 !important;
+    }
+
   </style>
 </head>
 <body class="modern-page modern-standalone-body">
 
   <div class="modern-standalone-container">
-    <div class="modern-window modern-webshop-window">
+    <div class="win-window focused modern-webshop-window">
       
       <!-- Title Bar -->
-      <div class="modern-titlebar">
-        <div class="modern-titlebar-left">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
-          <span class="modern-titlebar-title">MNRV Webshop</span>
-        </div>
-        <div class="modern-titlebar-controls" style="display: flex; align-items: center; gap: 16px;">
-          <button class="modern-cart-btn" id="cart-toolbar-btn">
-            Winkelwagen
-            <span class="cart-badge empty" id="cart-badge">0</span>
+      <div class="win-titlebar">
+        <img src="assets/icons/w98_MSIE1_32x32_4.png" class="win-titlebar-icon" alt="Shop Icon">
+        <div class="win-titlebar-title">MNRV Webshop</div>
+        <div class="win-titlebar-buttons" style="display: flex; align-items: center; gap: 6px;">
+          <button class="modern-cart-btn" id="cart-toolbar-btn" style="padding:2px 6px; font-size:10px; height:14px; margin-right:8px; border-radius:0; border:1px solid #000; color:#000; background:#c0c0c0;">
+            Winkelwagen <span class="cart-badge empty" id="cart-badge">0</span>
           </button>
-          <div style="display:flex; gap:8px;">
-            <button class="modern-title-btn min" title="Minimaliseren"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
-            <button class="modern-title-btn max" title="Maximaliseren"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg></button>
-            <a href="index.html" class="modern-title-btn close modern-no-decor" title="Sluiten"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a>
-          </div>
+          <button class="win-titlebar-btn min-btn" title="Minimaliseren">
+            <span style="height: 2px; width: 6px; background: black; margin-top: 8px; margin-right: 2px;"></span>
+          </button>
+          <button class="win-titlebar-btn max-btn" title="Maximaliseren">
+            <span style="height: 8px; width: 9px; border-left: black 1px solid; border-right: black 1px solid; border-bottom: black 1px solid; border-top: black 2px solid;"></span>
+          </button>
+          <a href="index.html" class="win-titlebar-btn close-btn" style="text-decoration:none; color:black;">×</a>
         </div>
       </div>
 
@@ -103,7 +155,7 @@
           
           <div class="shop-search-modern">
             <input type="text" id="shop-search" placeholder="Zoeken in shop...">
-            <button id="shop-search-btn" class="filter-btn-modern" style="padding:8px; border:none; background:rgba(255,255,255,0.1);">🔍</button>
+            <button id="shop-search-btn" class="filter-btn-modern" style="padding:8px 12px; border:1px outset #fff;">Zoek</button>
           </div>
         </div>
 
@@ -113,7 +165,7 @@
           <div class="product-card" data-product-id="chatbot-starter" data-category="ai-agent" data-price="499" data-billing="mnd">
             <div class="product-img">
               <span class="product-badge">Populair</span>
-              <div style="font-size: 48px;">🤖</div>
+              <div style="font-size: 24px; font-weight: bold;">[ AI CHAT ]</div>
             </div>
             <div class="product-tags"><span class="product-tag">AI</span><span class="product-tag">Chatbot</span></div>
             <div class="product-name">AI Chatbot Starter</div>
@@ -127,7 +179,7 @@
 
           <!-- Product 2: Product Adviseur Pro -->
           <div class="product-card" data-product-id="product-adviseur" data-category="ai-agent" data-price="899" data-billing="mnd">
-            <div class="product-img"><div style="font-size: 48px;">💡</div></div>
+            <div class="product-img"><div style="font-size: 24px; font-weight: bold;">[ ADVISEUR ]</div></div>
             <div class="product-tags"><span class="product-tag">AI</span><span class="product-tag">Sales</span></div>
             <div class="product-name">Product Adviseur Pro</div>
             <p class="product-description">AI-gedreven productaanbevelingen op basis van klantgedrag.</p>
@@ -140,7 +192,7 @@
 
           <!-- Product 3: UX Optimizer -->
           <div class="product-card" data-product-id="ux-optimizer" data-category="ux-ui" data-price="699" data-billing="mnd">
-            <div class="product-img"><div style="font-size: 48px;">📈</div></div>
+            <div class="product-img"><div style="font-size: 24px; font-weight: bold;">[ OPTIMIZER ]</div></div>
             <div class="product-tags"><span class="product-tag">UX/UI</span><span class="product-tag">A/B Testing</span></div>
             <div class="product-name">UX Optimizer</div>
             <p class="product-description">AI A/B testing en personalisatie voor hogere conversie.</p>
@@ -155,7 +207,7 @@
           <div class="product-card" data-product-id="enterprise" data-category="webshop" data-price="0" data-billing="custom">
             <div class="product-img">
               <span class="product-badge" style="background:#b91c1c; border-color:#ef4444;">Premium</span>
-              <div style="font-size: 48px;">👑</div>
+              <div style="font-size: 24px; font-weight: bold;">[ ENTERPRISE ]</div>
             </div>
             <div class="product-tags"><span class="product-tag">Enterprise</span><span class="product-tag">Custom</span></div>
             <div class="product-name">MNRV Enterprise</div>
@@ -169,7 +221,7 @@
 
           <!-- Product 5: AI Workshop -->
           <div class="product-card" data-product-id="workshop" data-category="strategie" data-price="1250" data-billing="eenmalig">
-            <div class="product-img"><div style="font-size: 48px;">🎓</div></div>
+            <div class="product-img"><div style="font-size: 24px; font-weight: bold;">[ WORKSHOP ]</div></div>
             <div class="product-tags"><span class="product-tag">Training</span><span class="product-tag">Team</span></div>
             <div class="product-name">AI Workshop</div>
             <p class="product-description">Halve dag AI-workshop op locatie voor jouw team.</p>
@@ -182,7 +234,7 @@
 
           <!-- Product 6: AI Strategie Traject -->
           <div class="product-card" data-product-id="strategie-traject" data-category="strategie" data-price="2500" data-billing="eenmalig">
-            <div class="product-img"><div style="font-size: 48px;">🗺️</div></div>
+            <div class="product-img"><div style="font-size: 24px; font-weight: bold;">[ STRATEGIE ]</div></div>
             <div class="product-tags"><span class="product-tag">Strategie</span><span class="product-tag">Roadmap</span></div>
             <div class="product-name">AI Strategie Traject</div>
             <p class="product-description">Complete AI roadmap op maat voor jouw organisatie.</p>
@@ -196,7 +248,7 @@
         </div>
 
         <div class="no-results hide" id="no-results" style="text-align: center; padding: 40px;">
-          <div style="font-size: 48px; margin-bottom: 16px;">🤷‍♂️</div>
+          <div style="font-size: 24px; font-weight: bold; margin-bottom: 16px;">[ GEEN RESULTATEN ]</div>
           <p class="modern-p">We konden geen producten vinden voor deze categorie/zoekopdracht.</p>
           <button class="btn-secondary" style="padding: 10px 20px; border-radius: 8px; color: #fff; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);" onclick="resetFilters()">Reset Filters</button>
         </div>
@@ -207,10 +259,12 @@
 
   <!-- Product Modal -->
   <div class="modern-modal-overlay" id="modal-overlay"></div>
-  <div id="product-modal" class="modern-window modern-dialog" style="height: auto; max-height: 80vh;">
-    <div class="modern-titlebar">
-      <span class="modern-titlebar-title" id="modal-title">Product Details</span>
-      <button class="modern-title-btn close" onclick="closeProductModal()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+  <div id="product-modal" class="win-window modern-dialog" style="height: auto; max-height: 80vh;">
+    <div class="win-titlebar">
+      <div class="win-titlebar-title" id="modal-title">Product Details</div>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn close-btn" onclick="closeProductModal()">×</button>
+      </div>
     </div>
     <div class="modern-body" id="modal-body" style="padding: 24px;">
       <!-- Dyn content -->
@@ -218,10 +272,12 @@
   </div>
 
   <!-- Cart Window -->
-  <div id="cart-window" class="modern-window modern-dialog" style="height: auto; max-height: 80vh;">
-    <div class="modern-titlebar">
-      <span class="modern-titlebar-title">Jouw Winkelwagen</span>
-      <button class="modern-title-btn close" onclick="toggleCart()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+  <div id="cart-window" class="win-window modern-dialog" style="height: auto; max-height: 80vh;">
+    <div class="win-titlebar">
+      <div class="win-titlebar-title">Jouw Winkelwagen</div>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn close-btn" onclick="toggleCart()">×</button>
+      </div>
     </div>
     <div class="modern-body" style="padding: 24px;">
       <div id="cart-body"></div>
@@ -233,10 +289,12 @@
   </div>
 
   <!-- Checkout Dialog -->
-  <div class="modern-window modern-dialog" id="checkout-dialog" style="height: auto; max-height: 80vh;">
-    <div class="modern-titlebar">
-      <span class="modern-titlebar-title">Bestelling verwerken...</span>
-      <button class="modern-title-btn close" onclick="closeCheckout()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+  <div class="win-window modern-dialog" id="checkout-dialog" style="height: auto; max-height: 80vh;">
+    <div class="win-titlebar">
+      <div class="win-titlebar-title">Bestelling verwerken...</div>
+      <div class="win-titlebar-buttons">
+        <button class="win-titlebar-btn close-btn" onclick="closeCheckout()">×</button>
+      </div>
     </div>
     <div class="modern-body" id="checkout-body" style="padding: 24px; text-align: center;">
       <!-- Dyn content -->
@@ -244,7 +302,7 @@
   </div>
 
   <div class="shop-toast" id="shop-toast">
-    <div style="font-size: 24px;">✅</div>
+    <div style="font-size: 16px; font-weight: bold;">[ OK ]</div>
     <span id="toast-text" style="font-weight: 500;">Item toegevoegd</span>
   </div>
 
@@ -828,8 +886,8 @@
 
   function showCheckoutSuccess() {
     var body = document.getElementById('checkout-body');
-    var titleEl = document.getElementById('checkout-dialog').querySelector('.modern-titlebar-title');
-    if (titleEl) titleEl.textContent = 'Bestelling bevestigd!';
+    var titleEl = document.getElementById('checkout-dialog').querySelector('.win-titlebar-title');
+    if (titleEl) titleEl.textContent = 'Bestelling succesvol!';
 
     body.innerHTML =
       '<div class="checkout-success">' +
@@ -857,8 +915,8 @@
   window.closeCheckout = function() {
     var dialog = document.getElementById('checkout-dialog');
     if (dialog) dialog.classList.remove('visible');
-    var titleEl = dialog.querySelector('.modern-titlebar-title');
-    if (titleEl) titleEl.textContent = 'Bestelling verwerken...';
+    var titleEl = dialog.querySelector('.win-titlebar-title');
+    if (titleEl) titleEl.textContent = 'Fout bij verwerken...';
   };
 
   // ============================================
