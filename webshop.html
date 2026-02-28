@@ -3,446 +3,253 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MNRV Webshop - Internet Explorer</title>
-  <!-- Favicon -->
+  <title>MNRV Webshop</title>
   <link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png" />
-  <link rel="apple-touch-icon" href="img/icons/favicon-32x32.png" />
   <link rel="stylesheet" href="css/style.css">
-  
+  <style>
+    .modern-webshop-window { width: 100%; max-width: 1200px; height: 100%; max-height: 85vh; }
+    .shop-filter-bar-modern {
+      display: flex; gap: 12px; margin-bottom: 32px; flex-wrap: wrap; background: rgba(0,0,0,0.3); padding: 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); align-items: center;
+    }
+    .filter-btn-modern { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #a1a1aa; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; font-size: 13px; }
+    .filter-btn-modern.active, .filter-btn-modern:hover { background: rgba(139, 92, 246, 0.2); border-color: #8b5cf6; color: #fff; }
+    .shop-search-modern {
+      display: flex; gap: 8px; margin-left: auto;
+    }
+    .shop-search-modern input { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 8px; color: #fff; outline: none; }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+    .product-card { background: linear-gradient(145deg, rgba(20,20,30,0.8), rgba(10,10,15,0.8)); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 24px; position: relative; transition: all 0.3s; display: flex; flex-direction: column; overflow: hidden; }
+    .product-card:hover { transform: translateY(-4px); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15); }
+    .product-img { height: 120px; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.3); border-radius: 12px; margin-bottom: 20px; position: relative; }
+    .product-badge { position: absolute; top: 12px; right: 12px; background: rgba(139,92,246,0.3); border: 1px solid #8b5cf6; color: #fff; padding: 4px 8px; font-size: 10px; border-radius: 4px; font-weight: bold; }
+    .product-tags { display: flex; gap: 8px; margin-bottom: 12px; }
+    .product-tag { font-size: 10px; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 12px; color: #a1a1aa; }
+    .product-name { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .product-description { font-size: 13px; color: #a1a1aa; line-height: 1.5; margin-bottom: 24px; flex-grow: 1; }
+    .product-price { font-size: 16px; font-weight: 600; color: #60a5fa; margin-bottom: 16px; }
+    .product-actions { display: flex; gap: 12px; }
+    .product-actions button, .product-actions a { flex: 1; text-align: center; padding: 10px; border-radius: 8px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; color: #fff; text-decoration: none;}
+    .btn-secondary { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+    .btn-primary { background: linear-gradient(135deg, #8b5cf6, #3b82f6); box-shadow: 0 4px 12px rgba(139,92,246,0.3); }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .modern-cart-btn { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 8px 16px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+    .modern-cart-btn:hover { background: rgba(255,255,255,0.1); }
+    .cart-badge { background: #ef4444; color: #fff; font-size: 11px; padding: 2px 6px; border-radius: 12px; }
+    .cart-badge.empty { display: none; }
+    .hide { display: none !important; }
+    
+    /* Toast modern */
+    .shop-toast {
+      position: fixed; bottom: 80px; right: 20px; background: rgba(20,20,30,0.95); border: 1px solid rgba(139,92,246,0.4); 
+      color: #fff; padding: 16px 24px; border-radius: 12px; display: flex; align-items: center; gap: 12px; 
+      transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 10000; box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    }
+    .shop-toast.visible { transform: translateY(0); opacity: 1; }
+
+    /* Modals modern */
+    .modern-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 9999; display: none; }
+    .modern-modal-overlay.visible { display: block; }
+    .modern-dialog { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.95); opacity: 0; pointer-events: none; z-index: 10000; transition: all 0.2s; width: 90%; max-width: 600px; }
+    .modern-dialog.visible { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: auto; }
+    .cart-item { display: flex; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .cart-item-name { flex: 1; font-weight: 600; font-size: 14px; }
+    .cart-item-qty { display: flex; align-items: center; gap: 8px; }
+    .qty-btn { background: rgba(255,255,255,0.1); border: none; color: #fff; width: 28px; height: 28px; border-radius: 4px; cursor: pointer; }
+    .cart-item-remove { background: rgba(239,68,68,0.2); color: #ef4444; border: none; width: 32px; height: 32px; border-radius: 4px; cursor: pointer; }
+
+  </style>
 </head>
-<body>
+<body class="modern-page modern-standalone-body">
 
-<div class="page-desktop">
-
-  <!-- IE Window (full page) -->
-  <div class="page-window">
-
-    <!-- Title Bar -->
-    <div class="win-titlebar">
-      <svg class="win-titlebar-icon" viewBox="0 0 16 16">
-        <circle cx="8" cy="8" r="6" fill="#0078d7"/>
-        <text x="8" y="11" text-anchor="middle" fill="#fff" font-size="8" font-weight="bold" font-style="italic" font-family="serif">e</text>
-      </svg>
-      <span class="win-titlebar-title">MNRV Webshop - Microsoft Internet Explorer</span>
-      <div class="win-titlebar-buttons">
-        <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
-        <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
-        <a href="index.html" class="win-titlebar-btn close-btn clean-link" title="Terug naar bureaublad">X</a>
-      </div>
-    </div>
-
-    <!-- Menu Bar -->
-    <div class="win-menubar">
-      <span class="win-menubar-item">Bestand</span>
-      <span class="win-menubar-item">Bewerken</span>
-      <span class="win-menubar-item">Beeld</span>
-      <span class="win-menubar-item">Favorieten</span>
-      <span class="win-menubar-item">Extra</span>
-      <span class="win-menubar-item">Help</span>
-    </div>
-
-    <!-- Toolbar -->
-    <div class="win-toolbar">
-      <a href="index.html" class="win-toolbar-btn clean-link">
-        <svg viewBox="0 0 16 16"><polygon points="10,2 2,8 10,14" fill="#000"/></svg>
-        Terug
-      </a>
-      <button class="win-toolbar-btn" onclick="location.reload()" title="Paina refresh">
-        <svg viewBox="0 0 16 16"><path d="M8 2 A6 6 0 1 1 2 8" fill="none" stroke="#000" stroke-width="1.5"/><polygon points="8,0 8,4 4,2" fill="#000"/></svg>
-        Vernieuwen
-      </button>
-      <a href="index.html" class="win-toolbar-btn clean-link">
-        <svg viewBox="0 0 16 16"><path d="M8 2 L2 8 L5 8 L5 14 L11 14 L11 8 L14 8 Z" fill="#000"/></svg>
-        Start
-      </a>
-      <div class="win-toolbar-separator"></div>
-      <button class="win-toolbar-btn" id="cart-toolbar-btn" title="Winkelwagen openen">
-        <svg viewBox="0 0 16 16">
-          <path d="M1 1 L3 1 L5 10 L13 10 L15 4 L4 4" fill="none" stroke="#000" stroke-width="1.5" stroke-linejoin="round"/>
-          <circle cx="6" cy="13" r="1.5" fill="#000"/>
-          <circle cx="12" cy="13" r="1.5" fill="#000"/>
-        </svg>
-        Wagen
-        <span class="cart-badge empty" id="cart-badge">0</span>
-      </button>
-    </div>
-
-    <!-- Address Bar -->
-    <div class="win-addressbar">
-      <label>Adres:</label>
-      <input type="text" value="https://www.mnrv.ai/webshop" readonly class="win-input flex-1" title="Huidig adres" aria-label="Webadres webshop">
-      <button class="win-btn btn-sm" title="Ga naar de pagina">Ga</button>
-    </div>
-
-    <!-- Category Filter Bar -->
-    <div class="shop-filter-bar">
-      <label>Categorie:</label>
-      <button class="filter-btn active" data-filter="all">Alles</button>
-      <button class="filter-btn" data-filter="ai-agent">AI Agents</button>
-      <button class="filter-btn" data-filter="webshop">Webshop</button>
-      <button class="filter-btn" data-filter="ux-ui">UX/UI</button>
-      <button class="filter-btn" data-filter="strategie">Strategie</button>
-      <div class="shop-search-wrap">
-        <input type="text" id="shop-search" placeholder="Zoeken..." class="win-input" aria-label="Zoeken">
-        <button class="win-btn btn-sm" id="shop-search-btn" title="Zoek bevestigen">
-          <svg viewBox="0 0 16 16" class="w-12 h-12">
-            <circle cx="7" cy="7" r="4" fill="none" stroke="#000" stroke-width="1.5"/>
-            <line x1="10" y1="10" x2="14" y2="14" stroke="#000" stroke-width="1.5"/>
+  <div class="modern-standalone-container">
+    <div class="modern-window modern-webshop-window">
+      
+      <!-- Title Bar -->
+      <div class="modern-titlebar">
+        <div class="modern-titlebar-left">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
           </svg>
-        </button>
+          <span class="modern-titlebar-title">MNRV Webshop</span>
+        </div>
+        <div class="modern-titlebar-controls" style="display: flex; align-items: center; gap: 16px;">
+          <button class="modern-cart-btn" id="cart-toolbar-btn">
+            Winkelwagen
+            <span class="cart-badge empty" id="cart-badge">0</span>
+          </button>
+          <div style="display:flex; gap:8px;">
+            <button class="modern-title-btn min" title="Minimaliseren"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line></svg></button>
+            <button class="modern-title-btn max" title="Maximaliseren"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg></button>
+            <a href="index.html" class="modern-title-btn close modern-no-decor" title="Sluiten"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></a>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <!-- Page Content -->
-    <div class="win-body flex-1 overflow-auto">
-      <div class="ie-page-content">
+      <!-- Content -->
+      <div class="modern-body">
+        
+        <header style="text-align: center; margin-bottom: 40px;">
+          <h1 class="modern-h1">De MNRV <span class="modern-gradient-text">Webshop</span></h1>
+          <p class="modern-p">Implementeer cutting-edge AI direct in jouw e-commerce architectuur.</p>
+        </header>
 
-        <!-- Header Banner -->
-        <div class="shop-banner p-16 text-center">
-          <img src="mnrv logo.png" alt="MNRV" class="w-120 max-w-full mb-8">
-          <h1 class="text-white m-0 fs-16">MNRV Webshop</h1>
-          <p class="text-gray fs-11 mt-4">AI-Powered Oplossingen voor jouw Webshop &mdash; Klik op een product voor details</p>
+        <div class="shop-filter-bar-modern">
+          <button class="filter-btn filter-btn-modern active" data-filter="all">Alles</button>
+          <button class="filter-btn filter-btn-modern" data-filter="ai-agent">AI Agents</button>
+          <button class="filter-btn filter-btn-modern" data-filter="webshop">Webshop</button>
+          <button class="filter-btn filter-btn-modern" data-filter="ux-ui">UX/UI</button>
+          <button class="filter-btn filter-btn-modern" data-filter="strategie">Strategie</button>
+          
+          <div class="shop-search-modern">
+            <input type="text" id="shop-search" placeholder="Zoeken in shop...">
+            <button id="shop-search-btn" class="filter-btn-modern" style="padding:8px; border:none; background:rgba(255,255,255,0.1);">🔍</button>
+          </div>
         </div>
 
-        <p>Welkom in de MNRV Webshop! Hier vind je onze AI-oplossingen en servicepakketten die jouw e-commerce platform naar een hoger niveau tillen. Klik op een product voor meer informatie of voeg het direct toe aan je wagen.</p>
-
-        <hr>
-
-        <h2>Populaire Pakketten</h2>
-
         <div class="product-grid" id="product-grid">
-
+          
           <!-- Product 1: AI Chatbot Starter -->
           <div class="product-card" data-product-id="chatbot-starter" data-category="ai-agent" data-price="499" data-billing="mnd">
             <div class="product-img">
               <span class="product-badge">Populair</span>
-              <svg viewBox="0 0 48 48" class="icon-48">
-                <rect x="4" y="4" width="40" height="40" rx="6" fill="#1a1a3e"/>
-                <rect x="10" y="12" width="28" height="18" rx="3" fill="#2a2a5e" stroke="#4488ff" stroke-width="1"/>
-                <circle cx="18" cy="20" r="2" fill="#4488ff"/>
-                <circle cx="30" cy="20" r="2" fill="#4488ff"/>
-                <path d="M18 25 Q24 29 30 25" fill="none" stroke="#4488ff" stroke-width="1.5" stroke-linecap="round"/>
-                <rect x="20" y="32" width="8" height="4" rx="1" fill="#4488ff"/>
-                <text x="24" y="44" text-anchor="middle" fill="#4488ff" font-size="5" font-weight="bold">AI CHAT</text>
-              </svg>
+              <div style="font-size: 48px;">🤖</div>
             </div>
-            <div class="product-tags">
-              <span class="product-tag">AI</span>
-              <span class="product-tag">Chatbot</span>
-              <span class="product-tag">Klantenservice</span>
-            </div>
+            <div class="product-tags"><span class="product-tag">AI</span><span class="product-tag">Chatbot</span></div>
             <div class="product-name">AI Chatbot Starter</div>
-            <p class="product-description">Basis AI chatbot voor klantenservice op jouw webshop</p>
-            <div class="product-price">Vanaf &euro;499/mnd</div>
+            <p class="product-description">Basis AI chatbot voor klantenservice op jouw webshop. 24/7 paraat.</p>
+            <div class="product-price">Vanaf &euro;499 / mnd</div>
             <div class="product-actions">
-              <button class="win-btn" class="win-btn-sm" onclick="openProductModal('chatbot-starter')">Details</button>
-              <button class="win-btn" class="win-btn-sm" onclick="addToCart('chatbot-starter')">+ Wagen</button>
+              <button class="btn-secondary" onclick="openProductModal('chatbot-starter')">Details</button>
+              <button class="btn-primary" onclick="addToCart('chatbot-starter')">+ Wagen</button>
             </div>
           </div>
 
           <!-- Product 2: Product Adviseur Pro -->
           <div class="product-card" data-product-id="product-adviseur" data-category="ai-agent" data-price="899" data-billing="mnd">
-            <div class="product-img">
-              <svg viewBox="0 0 48 48" class="icon-48">
-                <rect x="4" y="4" width="40" height="40" rx="6" fill="#000080"/>
-                <rect x="10" y="10" width="12" height="16" rx="1" fill="#c0c0ff" stroke="#fff" stroke-width="0.5"/>
-                <rect x="26" y="10" width="12" height="16" rx="1" fill="#c0c0ff" stroke="#fff" stroke-width="0.5"/>
-                <path d="M24 30 L16 36 L32 36 Z" fill="#ffd700"/>
-                <text x="16" y="20" text-anchor="middle" fill="#000080" font-size="5">A</text>
-                <text x="32" y="20" text-anchor="middle" fill="#000080" font-size="5">B</text>
-                <text x="24" y="44" text-anchor="middle" fill="#ffd700" font-size="5" font-weight="bold">ADVISER</text>
-              </svg>
-            </div>
-            <div class="product-tags">
-              <span class="product-tag">AI</span>
-              <span class="product-tag">Productadvies</span>
-              <span class="product-tag">Personalisatie</span>
-            </div>
+            <div class="product-img"><div style="font-size: 48px;">💡</div></div>
+            <div class="product-tags"><span class="product-tag">AI</span><span class="product-tag">Sales</span></div>
             <div class="product-name">Product Adviseur Pro</div>
-            <p class="product-description">AI-gedreven productaanbevelingen op basis van klantgedrag</p>
-            <div class="product-price">Vanaf &euro;899/mnd</div>
+            <p class="product-description">AI-gedreven productaanbevelingen op basis van klantgedrag.</p>
+            <div class="product-price">Vanaf &euro;899 / mnd</div>
             <div class="product-actions">
-              <button class="win-btn" class="win-btn-sm" onclick="openProductModal('product-adviseur')">Details</button>
-              <button class="win-btn" class="win-btn-sm" onclick="addToCart('product-adviseur')">+ Wagen</button>
+              <button class="btn-secondary" onclick="openProductModal('product-adviseur')">Details</button>
+              <button class="btn-primary" onclick="addToCart('product-adviseur')">+ Wagen</button>
             </div>
           </div>
 
           <!-- Product 3: UX Optimizer -->
           <div class="product-card" data-product-id="ux-optimizer" data-category="ux-ui" data-price="699" data-billing="mnd">
-            <div class="product-img">
-              <svg viewBox="0 0 48 48" class="icon-48">
-                <rect x="4" y="4" width="40" height="40" rx="6" fill="#008080"/>
-                <rect x="10" y="10" width="28" height="20" rx="2" fill="#fff" stroke="#005050" stroke-width="1"/>
-                <rect x="12" y="12" width="8" height="6" fill="#00cccc"/>
-                <rect x="22" y="12" width="14" height="2" fill="#e0e0e0"/>
-                <rect x="22" y="16" width="10" height="2" fill="#e0e0e0"/>
-                <rect x="12" y="20" width="24" height="2" fill="#e0e0e0"/>
-                <rect x="12" y="24" width="24" height="4" rx="1" fill="#008080"/>
-                <path d="M24 34 L20 40 L28 40 Z" fill="#005050"/>
-                <text x="24" y="44" text-anchor="middle" fill="#fff" font-size="5" font-weight="bold">UX/UI</text>
-              </svg>
-            </div>
-            <div class="product-tags">
-              <span class="product-tag">UX/UI</span>
-              <span class="product-tag">A/B Testing</span>
-              <span class="product-tag">Conversie</span>
-            </div>
+            <div class="product-img"><div style="font-size: 48px;">📈</div></div>
+            <div class="product-tags"><span class="product-tag">UX/UI</span><span class="product-tag">A/B Testing</span></div>
             <div class="product-name">UX Optimizer</div>
-            <p class="product-description">AI A/B testing en personalisatie voor hogere conversie</p>
-            <div class="product-price">Vanaf &euro;699/mnd</div>
+            <p class="product-description">AI A/B testing en personalisatie voor hogere conversie.</p>
+            <div class="product-price">Vanaf &euro;699 / mnd</div>
             <div class="product-actions">
-              <button class="win-btn" class="win-btn-sm" onclick="openProductModal('ux-optimizer')">Details</button>
-              <button class="win-btn" class="win-btn-sm" onclick="addToCart('ux-optimizer')">+ Wagen</button>
+              <button class="btn-secondary" onclick="openProductModal('ux-optimizer')">Details</button>
+              <button class="btn-primary" onclick="addToCart('ux-optimizer')">+ Wagen</button>
             </div>
           </div>
 
           <!-- Product 4: MNRV Enterprise -->
           <div class="product-card" data-product-id="enterprise" data-category="webshop" data-price="0" data-billing="custom">
             <div class="product-img">
-              <span class="product-badge">Premium</span>
-              <svg viewBox="0 0 48 48" class="icon-48">
-                <rect x="4" y="4" width="40" height="40" rx="6" fill="#800080"/>
-                <rect x="10" y="14" width="28" height="22" rx="2" fill="#a000a0" stroke="#ffd700" stroke-width="1"/>
-                <rect x="14" y="18" width="8" height="6" fill="#ffd700" opacity="0.3"/>
-                <rect x="26" y="18" width="8" height="6" fill="#ffd700" opacity="0.3"/>
-                <rect x="14" y="28" width="8" height="6" fill="#ffd700" opacity="0.3"/>
-                <rect x="26" y="28" width="8" height="6" fill="#ffd700" opacity="0.3"/>
-                <text x="24" y="12" text-anchor="middle" fill="#ffd700" font-size="6" font-weight="bold">MNRV</text>
-                <text x="24" y="44" text-anchor="middle" fill="#ffd700" font-size="5" font-weight="bold">ENTERPRISE</text>
-              </svg>
+              <span class="product-badge" style="background:#b91c1c; border-color:#ef4444;">Premium</span>
+              <div style="font-size: 48px;">👑</div>
             </div>
-            <div class="product-tags">
-              <span class="product-tag">Enterprise</span>
-              <span class="product-tag">Full Suite</span>
-              <span class="product-tag">Custom</span>
-            </div>
+            <div class="product-tags"><span class="product-tag">Enterprise</span><span class="product-tag">Custom</span></div>
             <div class="product-name">MNRV Enterprise</div>
-            <p class="product-description">Complete AI-suite: agents, optimalisatie, integraties</p>
+            <p class="product-description">Complete AI-suite: agents, optimalisatie, custom integraties.</p>
             <div class="product-price">Op aanvraag</div>
             <div class="product-actions">
-              <button class="win-btn" class="win-btn-sm" onclick="openProductModal('enterprise')">Details</button>
-              <a href="contact.html" class="win-btn win-btn-sm clean-link">Offerte</a>
+              <button class="btn-secondary" onclick="openProductModal('enterprise')">Details</button>
+              <a href="contact.html" class="btn-primary">Offerte</a>
             </div>
           </div>
 
           <!-- Product 5: AI Workshop -->
           <div class="product-card" data-product-id="workshop" data-category="strategie" data-price="1250" data-billing="eenmalig">
-            <div class="product-img">
-              <svg viewBox="0 0 48 48" class="icon-48">
-                <rect x="4" y="4" width="40" height="40" rx="6" fill="#c0c0c0" stroke="#808080" stroke-width="1"/>
-                <rect x="10" y="14" width="28" height="18" rx="2" fill="#fff" stroke="#808080" stroke-width="0.5"/>
-                <rect x="14" y="10" width="4" height="6" fill="#000080"/>
-                <rect x="30" y="10" width="4" height="6" fill="#000080"/>
-                <line x1="12" y1="18" x2="36" y2="18" stroke="#808080" stroke-width="0.5"/>
-                <line x1="12" y1="22" x2="36" y2="22" stroke="#808080" stroke-width="0.5"/>
-                <line x1="12" y1="26" x2="36" y2="26" stroke="#808080" stroke-width="0.5"/>
-                <circle cx="20" cy="24" r="3" fill="#000080" opacity="0.2"/>
-                <text x="20" y="25.5" text-anchor="middle" fill="#000080" font-size="4" font-weight="bold">AI</text>
-                <text x="24" y="40" text-anchor="middle" fill="#000" font-size="5" font-weight="bold">WORKSHOP</text>
-                <text x="24" y="46" text-anchor="middle" fill="#000080" font-size="4">halve dag</text>
-              </svg>
-            </div>
-            <div class="product-tags">
-              <span class="product-tag">Workshop</span>
-              <span class="product-tag">Training</span>
-              <span class="product-tag">Team</span>
-            </div>
+            <div class="product-img"><div style="font-size: 48px;">🎓</div></div>
+            <div class="product-tags"><span class="product-tag">Training</span><span class="product-tag">Team</span></div>
             <div class="product-name">AI Workshop</div>
-            <p class="product-description">Halve dag AI-workshop voor jouw team</p>
+            <p class="product-description">Halve dag AI-workshop op locatie voor jouw team.</p>
             <div class="product-price">&euro;1.250 eenmalig</div>
             <div class="product-actions">
-              <button class="win-btn" class="win-btn-sm" onclick="openProductModal('workshop')">Details</button>
-              <button class="win-btn" class="win-btn-sm" onclick="addToCart('workshop')">+ Wagen</button>
+              <button class="btn-secondary" onclick="openProductModal('workshop')">Details</button>
+              <button class="btn-primary" onclick="addToCart('workshop')">+ Wagen</button>
             </div>
           </div>
 
           <!-- Product 6: AI Strategie Traject -->
           <div class="product-card" data-product-id="strategie-traject" data-category="strategie" data-price="2500" data-billing="eenmalig">
-            <div class="product-img">
-              <svg viewBox="0 0 48 48" class="icon-48">
-                <rect x="4" y="4" width="40" height="40" rx="6" fill="#00aa00"/>
-                <path d="M12 36 L12 16 L20 28 L28 20 L36 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="12" cy="16" r="2" fill="#fff"/>
-                <circle cx="20" cy="28" r="2" fill="#fff"/>
-                <circle cx="28" cy="20" r="2" fill="#fff"/>
-                <circle cx="36" cy="24" r="2" fill="#fff"/>
-                <path d="M34 22 L36 24 L34 26" fill="none" stroke="#ffd700" stroke-width="1.5"/>
-                <text x="24" y="44" text-anchor="middle" fill="#fff" font-size="5" font-weight="bold">STRATEGIE</text>
-              </svg>
-            </div>
-            <div class="product-tags">
-              <span class="product-tag">Strategie</span>
-              <span class="product-tag">Roadmap</span>
-              <span class="product-tag">Maatwerk</span>
-            </div>
+            <div class="product-img"><div style="font-size: 48px;">🗺️</div></div>
+            <div class="product-tags"><span class="product-tag">Strategie</span><span class="product-tag">Roadmap</span></div>
             <div class="product-name">AI Strategie Traject</div>
-            <p class="product-description">Complete AI roadmap op maat voor jouw organisatie</p>
+            <p class="product-description">Complete AI roadmap op maat voor jouw organisatie.</p>
             <div class="product-price">Vanaf &euro;2.500</div>
             <div class="product-actions">
-              <button class="win-btn" class="win-btn-sm" onclick="openProductModal('strategie-traject')">Details</button>
-              <button class="win-btn" class="win-btn-sm" onclick="addToCart('strategie-traject')">+ Wagen</button>
+              <button class="btn-secondary" onclick="openProductModal('strategie-traject')">Details</button>
+              <button class="btn-primary" onclick="addToCart('strategie-traject')">+ Wagen</button>
             </div>
           </div>
 
         </div>
 
-        <div class="no-results" id="no-results" class="hide">
-          <svg viewBox="0 0 32 32" class="icon-32">
-            <circle cx="16" cy="16" r="12" fill="#ffcc00" stroke="#000" stroke-width="1.5"/>
-            <text x="16" y="21" text-anchor="middle" font-size="14" fill="#000">?</text>
-          </svg>
-          <p>Geen producten gevonden voor deze zoekopdracht.</p>
-          <button class="win-btn mt-8 fs-10" onclick="resetFilters()">Filters resetten</button>
+        <div class="no-results hide" id="no-results" style="text-align: center; padding: 40px;">
+          <div style="font-size: 48px; margin-bottom: 16px;">🤷‍♂️</div>
+          <p class="modern-p">We konden geen producten vinden voor deze categorie/zoekopdracht.</p>
+          <button class="btn-secondary" style="padding: 10px 20px; border-radius: 8px; color: #fff; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);" onclick="resetFilters()">Reset Filters</button>
         </div>
-
-        <hr>
-
-        <!-- USP Section -->
-        <div class="win-groupbox mt-16 p-16 bg-white">
-          <legend>Waarom MNRV?</legend>
-          <div class="d-flex flex-wrap gap-16">
-            <div class="flex-1 min-w-200">
-              <h4 class="m-0 text-blue-800">1. Datagedreven</h4>
-              <p class="fs-11 mt-4">We nemen geen beslissingen op onderbuikgevoel. Alles wordt getest, gemeten en geoptimaliseerd.</p>
-            </div>
-            <div class="flex-1 min-w-200">
-              <h4 class="m-0 text-blue-800">2. Toekomstbestendig</h4>
-              <p class="fs-11 mt-4">Onze oplossingen groeien met je mee. Schaalbaar, veilig en altijd up-to-date met de nieuwste AI.</p>
-            </div>
-            <div class="flex-1 min-w-200">
-              <h4 class="m-0 text-blue-800">3. Persoonlijk</h4>
-              <p class="fs-11 mt-4">Jouw succes is ons succes. Korte lijntjes, direct contact en een team dat met je meedenkt.</p>
-            </div>
-          </div>
-        </div>
-
-        <hr>
-
-        <!-- Bottom CTA -->
-        <div class="win-card text-center mt-16 p-20 bg-blue-100">
-          <h3 class="m-0 text-blue-900">Klaar om te innoveren?</h3>
-          <p class="fs-12 my-8">Plan een vrijblijvend adviesgesprek in met een van onze AI-experts.</p>
-          <a href="contact.html" class="win-btn win-btn-default mt-8 clean-link lh-16">Contact Opnemen</a>
-        </div>
-
-        <hr>
-        <p class="text-center fs-10 text-gray-800">
-          &copy; 2026 MNRV - Alle rechten voorbehouden |
-          <a href="index.html">Bureaublad</a> |
-          <a href="diensten.html">Diensten</a> |
-          <a href="over-ons.html">Over ons</a> |
-          <a href="contact.html">Contact</a>
-        </p>
 
       </div>
     </div>
-
-    <!-- Status Bar -->
-    <div class="win-statusbar">
-      <span class="win-statusbar-section" id="shop-status">6 producten | Wagen: 0 items</span>
-      <span class="win-statusbar-section">Internet</span>
-    </div>
-
   </div>
 
-  <!-- Product Detail Modal -->
-  <div class="product-modal-overlay" id="modal-overlay"></div>
-  <div id="product-modal" class="win-window hide h-460 position-center shop-modal modal-w-600">
-    <div class="win-titlebar">
-      <span class="win-titlebar-title" id="modal-title">Product Details</span>
-      <div class="win-titlebar-buttons">
-        <button class="win-titlebar-btn close-btn" onclick="MNRV.hideWindow('product-modal')" title="Sluiten">X</button>
-      </div>
+  <!-- Product Modal -->
+  <div class="modern-modal-overlay" id="modal-overlay"></div>
+  <div id="product-modal" class="modern-window modern-dialog" style="height: auto; max-height: 80vh;">
+    <div class="modern-titlebar">
+      <span class="modern-titlebar-title" id="modal-title">Product Details</span>
+      <button class="modern-title-btn close" onclick="closeProductModal()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
     </div>
-    <div class="modal-body win-body flex-1 overflow-auto">
-      <!-- Dynamically filled -->
+    <div class="modern-body" id="modal-body" style="padding: 24px;">
+      <!-- Dyn content -->
     </div>
   </div>
 
   <!-- Cart Window -->
-  <div id="cart-modal" class="win-window hide h-420 position-center shop-modal modal-w-500">
-    <div class="win-titlebar">
-      <span class="win-titlebar-title" id="cart-title">Winkelwagen</span>
-      <div class="win-titlebar-buttons">
-        <button class="win-titlebar-btn close-btn" onclick="MNRV.hideWindow('cart-modal')" title="Sluiten">X</button>
-      </div>
+  <div id="cart-window" class="modern-window modern-dialog" style="height: auto; max-height: 80vh;">
+    <div class="modern-titlebar">
+      <span class="modern-titlebar-title">Jouw Winkelwagen</span>
+      <button class="modern-title-btn close" onclick="toggleCart()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
     </div>
-    <div class="modal-body win-body bg-white flex-1 overflow-auto p-16">
-      <div id="cart-items" class="cart-items"></div>
-      <div class="cart-total" id="cart-total-container">
-        <strong>Totaal (excl. BTW):</strong> <span id="cart-total-price">&euro;0</span>
-      </div>
-      <div class="d-flex justify-center gap-8 mt-16 pt-16 border-t-gray">
-        <button class="win-btn win-btn-default" onclick="proceedToCheckout()" id="cart-checkout-btn">Afrekenen</button>
-        <button class="win-btn" onclick="MNRV.hideWindow('cart-modal')">Verder winkelen</button>
+    <div class="modern-body" style="padding: 24px;">
+      <div id="cart-body"></div>
+      <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 16px; font-weight: bold;">Totaal: <span id="cart-total" style="color: #60a5fa">&euro;0</span></span>
+        <button id="checkout-btn" class="btn-primary" style="padding: 12px 24px; border-radius: 8px; border:none; color:#fff; cursor:pointer;" onclick="startCheckout()">Afrekenen</button>
       </div>
     </div>
   </div>
 
-  <div id="checkout-modal" class="win-window hide h-500 position-center shop-modal modal-w-500">
-    <div class="win-titlebar">
-      <span class="win-titlebar-title">Direct Afrekenen</span>
-      <div class="win-titlebar-buttons">
-        <button class="win-titlebar-btn close-btn" onclick="MNRV.hideWindow('checkout-modal')" title="Annuleren">X</button>
-      </div>
-    </div>
-    <div class="modal-body win-body flex-1 overflow-auto bg-gray">
-      <div class="p-16">
-        <h2 class="fs-14 m-0 mb-12 border-b-gray pb-4">Gegevens Bevestigen</h2>
-        <form id="checkout-form" onsubmit="submitOrder(event)">
-          <div class="form-row">
-            <label for="ch-naam">Bedrijfsnaam *</label>
-            <input type="text" id="ch-naam" required class="win-input w-full">
-          </div>
-          <div class="form-row">
-            <label for="ch-email">E-mail *</label>
-            <input type="email" id="ch-email" required class="win-input w-full">
-          </div>
-          <div class="form-row">
-            <label for="ch-tel">Telefoon *</label>
-            <input type="tel" id="ch-tel" required class="win-input w-full">
-          </div>
-          <div class="form-row items-start">
-            <label for="ch-opm">Opmerking</label>
-            <textarea id="ch-opm" rows="3" class="win-textarea w-full"></textarea>
-          </div>
-
-          <p class="fs-11 text-gray">Let op: Na aanvraag nemen wij contact op voor de definitieve scoping en offerte. Je zit nog nergens aan vast.</p>
-
-          <div class="d-flex justify-center gap-8 mt-16 pt-16 border-t-gray max-w-full">
-            <button type="submit" class="win-btn win-btn-default" title="Verzenden">Aanvraag Verzenden</button>
-            <button type="button" class="win-btn" onclick="MNRV.hideWindow('checkout-modal')" title="Annuleren btn">Annuleren</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
   <!-- Checkout Dialog -->
-  <div class="checkout-dialog" id="checkout-dialog">
-    <div class="win-titlebar">
-      <svg class="win-titlebar-icon" viewBox="0 0 16 16">
-        <rect x="2" y="2" width="12" height="12" rx="2" fill="#008000"/>
-        <text x="8" y="11" text-anchor="middle" fill="#fff" font-size="8" font-weight="bold">$</text>
-      </svg>
-      <span class="win-titlebar-title">Bestelling verwerken...</span>
-      <div class="win-titlebar-buttons">
-        <button class="win-titlebar-btn close-btn" onclick="closeCheckout()">X</button>
-      </div>
+  <div class="modern-window modern-dialog" id="checkout-dialog" style="height: auto; max-height: 80vh;">
+    <div class="modern-titlebar">
+      <span class="modern-titlebar-title">Bestelling verwerken...</span>
+      <button class="modern-title-btn close" onclick="closeCheckout()"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
     </div>
-    <div class="checkout-body" id="checkout-body">
-      <!-- Dynamically filled -->
+    <div class="modern-body" id="checkout-body" style="padding: 24px; text-align: center;">
+      <!-- Dyn content -->
     </div>
   </div>
 
   <div class="shop-toast" id="shop-toast">
-    <svg viewBox="0 0 16 16" class="flex-shrink-0 w-14 h-14">
-      <circle cx="8" cy="8" r="7" fill="#008000"/>
-      <path d="M5 8 L7 10 L11 6" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span id="toast-text">Item toegevoegd</span>
+    <div style="font-size: 24px;">✅</div>
+    <span id="toast-text" style="font-weight: 500;">Item toegevoegd</span>
   </div>
 
-  <div class="taskbar">
+  <!-- Taskbar Override -->
+  <div class="taskbar modern-taskbar-override">
     <a href="index.html" class="start-btn clean-link">
       <span class="start-logo-grid">
         <span class="bg-red-500"></span><span class="bg-green-500"></span><span class="bg-blue-500"></span><span class="bg-yellow-500"></span>
@@ -450,14 +257,12 @@
       <span>Start</span>
     </a>
     <div class="taskbar-windows flex-1">
-      <button class="taskbar-window-btn active">MNRV Webshop</button>
+      <button class="taskbar-window-btn modern-sys-active">Webshop</button>
     </div>
     <div class="system-tray">
       <span id="tray-clock" class="tray-clock">00:00</span>
     </div>
   </div>
-
-</div>
 
 <script>
 (function() {
@@ -903,12 +708,12 @@
         '<button class="qty-btn" onclick="modalChangeQty(1)">+</button>' +
         '</div>' +
         '<div class="modal-buttons d-flex gap-8 justify-end mt-16 max-w-full">' +
-        '<button class="win-btn fs-10 btn-sm pr-16" onclick="closeProductModal()">Sluiten</button>' +
-        '<button class="win-btn win-btn-default fs-10 btn-sm pr-16" onclick="modalAddToCart(\'' + productId + '\')">Toevoegen aan wagen</button>' +
+        '<button class="btn-secondary" style="padding: 10px 20px; border-radius: 8px; color: #fff; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);" onclick="closeProductModal()">Sluiten</button>' +
+        '<button class="btn-primary" style="padding: 10px 20px; border-radius: 8px; color: #fff; border: none; cursor: pointer;" onclick="modalAddToCart(\'' + productId + '\')">Toevoegen aan wagen</button>' +
         '</div>'
       : '<div class="modal-buttons d-flex gap-8 justify-end mt-16 max-w-full">' +
-        '<button class="win-btn fs-10 btn-sm pr-16" onclick="closeProductModal()">Sluiten</button>' +
-        '<a href="contact.html" class="win-btn win-btn-default clean-link fs-10 btn-sm pr-16">Offerte aanvragen</a>' +
+        '<button class="btn-secondary" style="padding: 10px 20px; border-radius: 8px; color: #fff; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);" onclick="closeProductModal()">Sluiten</button>' +
+        '<a href="contact.html" class="btn-primary" style="padding: 10px 20px; border-radius: 8px; color: #fff; display: inline-block; text-decoration: none;">Offerte aanvragen</a>' +
         '</div>';
 
     document.getElementById('modal-body').innerHTML =
@@ -1023,7 +828,7 @@
 
   function showCheckoutSuccess() {
     var body = document.getElementById('checkout-body');
-    var titleEl = document.getElementById('checkout-dialog').querySelector('.win-titlebar-title');
+    var titleEl = document.getElementById('checkout-dialog').querySelector('.modern-titlebar-title');
     if (titleEl) titleEl.textContent = 'Bestelling bevestigd!';
 
     body.innerHTML =
@@ -1036,8 +841,8 @@
       '<p>Bedankt voor je interesse in MNRV. Ons team neemt binnen 24 uur contact met je op om de details te bespreken.</p>' +
       '<p class="mt-8 fs-10 text-gray-800">Referentienummer: MNRV-' + Date.now().toString(36).toUpperCase() + '</p>' +
       '<div class="mt-12 d-flex gap-6 justify-center">' +
-      '<button class="win-btn fs-10 btn-sm pr-16" onclick="closeCheckout()">Verder winkelen</button>' +
-      '<a href="contact.html" class="win-btn win-btn-default clean-link fs-10 btn-sm pr-16">Contact opnemen</a>' +
+      '<button class="btn-secondary" style="padding: 10px 20px; border-radius: 8px; color: #fff; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);" onclick="closeCheckout()">Verder winkelen</button>' +
+      '<a href="contact.html" class="btn-primary" style="padding: 10px 20px; border-radius: 8px; color: #fff; display: inline-block; text-decoration: none;">Contact opnemen</a>' +
       '</div>' +
       '</div>';
 
@@ -1052,7 +857,7 @@
   window.closeCheckout = function() {
     var dialog = document.getElementById('checkout-dialog');
     if (dialog) dialog.classList.remove('visible');
-    var titleEl = dialog.querySelector('.win-titlebar-title');
+    var titleEl = dialog.querySelector('.modern-titlebar-title');
     if (titleEl) titleEl.textContent = 'Bestelling verwerken...';
   };
 

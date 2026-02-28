@@ -3742,8 +3742,52 @@ a {
   display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
 }
 
+/* ==========================================================================
+   MODERN STANDALONE PAGES (Contact, Diensten, Webshop, ens.)
+   ========================================================================== */
+.modern-page {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Use flexbox to contain things, scroll inside windows */
+}
+
+.modern-standalone-body {
+  background: #050505;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.15) 0%, transparent 60%),
+    linear-gradient(to bottom, #050505 0%, #0a0a0f 100%);
+  color: #fff;
+}
+
+.modern-standalone-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+}
+
 .modern-taskbar-override {
-  position: relative;
+  position: relative !important;
+  flex-shrink: 0;
+  width: 100% !important;
+  z-index: 10000;
+}
+
+@media (max-width: 768px) {
+  .modern-standalone-container {
+    padding: 0; /* Full bleed on narrow screens */
+  }
+  .modern-window {
+    border-radius: 0 !important;
+    border: none !important;
+    max-height: 100vh !important;
+    height: 100% !important;
+  }
 }
 
 .modern-no-decor { text-decoration: none; }
