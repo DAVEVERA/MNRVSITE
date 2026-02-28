@@ -18,16 +18,16 @@
 
     .ms-window {
       background: rgba(15, 15, 20, 0.6);
-      backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
       color: #fff;
       display: inline-flex;
       flex-direction: column;
-      user-select: none;
       -webkit-user-select: none;
+      user-select: none;
       max-width: 98vw;
       max-height: calc(100vh - 80px);
       overflow: hidden;
@@ -80,8 +80,8 @@
       top: 100%;
       left: 12px;
       background: rgba(20, 20, 25, 0.95);
-      backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
       padding: 8px 0;
@@ -190,7 +190,7 @@
     .ms-cell:hover:not(.revealed) { background: rgba(255, 255, 255, 0.15); }
     .ms-cell.raised { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05); }
     .ms-cell.revealed { background: rgba(0, 0, 0, 0.4); cursor: default; }
-    .ms-cell.mine-hit { background: rgba(239, 68, 68, 0.2); backdrop-filter: sepia(100%) hue-rotate(300deg); }
+    .ms-cell.mine-hit { background: rgba(239, 68, 68, 0.2); -webkit-backdrop-filter: sepia(100%) hue-rotate(300deg); backdrop-filter: sepia(100%) hue-rotate(300deg); }
     .ms-cell.mine-wrong { background: rgba(0, 0, 0, 0.6); }
 
     /* Modern Number colors */
@@ -213,6 +213,13 @@
       .ms-cell { width: 20px; height: 20px; font-size: 11px; }
       .ms-cell svg { width: 12px; height: 12px; }
     }
+
+    /* Lint fixes for inline styles */
+    .ms-close-link { text-decoration: none; display: flex; align-items: center; justify-content: center; }
+    .ms-taskbar-width { width: 100%; }
+    .ms-start-font { font-family: 'Outfit', sans-serif; font-weight: 600; }
+    .ms-flex-1 { flex: 1; }
+    .ms-tray-text { color: #fff; font-weight: 500; }
   </style>
 </head>
 <body class="modern-page modern-standalone-body">
@@ -236,7 +243,7 @@
         <button class="modern-title-btn max" title="Maximaliseren">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
         </button>
-        <a href="index.html" class="modern-title-btn close" title="Sluiten" style="text-decoration:none;display:flex;align-items:center;justify-content:center;">
+        <a href="index.html" class="modern-title-btn close ms-close-link" title="Sluiten">
           <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </a>
       </div>
@@ -282,19 +289,19 @@
 </div>
 
 <!-- Taskbar -->
-<div class="taskbar modern-taskbar-override" style="width: 100%;">
+<div class="taskbar modern-taskbar-override ms-taskbar-width">
   <a href="index.html" class="start-btn clean-link">
     <span class="start-logo-grid">
       <span class="bg-red-500"></span><span class="bg-green-500"></span><span class="bg-blue-500"></span><span class="bg-yellow-500"></span>
     </span>
-    <span style="font-family:'Outfit', sans-serif; font-weight:600;">Start</span>
+    <span class="ms-start-font">Start</span>
   </a>
-  <div class="taskbar-windows" style="flex:1;">
+  <div class="taskbar-windows ms-flex-1">
     <button class="taskbar-window-btn modern-sys-active">Mijnenveger</button>
   </div>
   <div class="system-tray modern-sys-tray">
     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#a1a1aa" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-    <span id="tray-clock" class="tray-clock" style="color: #fff; font-weight: 500;">00:00</span>
+    <span id="tray-clock" class="tray-clock ms-tray-text">00:00</span>
   </div>
 </div>
 
