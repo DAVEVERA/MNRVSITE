@@ -331,19 +331,34 @@
       // Restore
       win.classList.remove('maximized');
       if (win._preMaxRect) {
-        win.style.left = win._preMaxRect.left;
-        win.style.top = win._preMaxRect.top;
-        win.style.width = win._preMaxRect.width;
-        win.style.height = win._preMaxRect.height;
+        win.style.left      = win._preMaxRect.left   + 'px';
+        win.style.top       = win._preMaxRect.top    + 'px';
+        win.style.width     = win._preMaxRect.width  + 'px';
+        win.style.height    = win._preMaxRect.height + 'px';
+        win.style.transform = win._preMaxRect.transform || '';
+        win.style.maxWidth  = '';
+        win.style.maxHeight = '';
       }
     } else {
-      // Save position before maximizing
+      // Save actual computed position (getBoundingClientRect = true screen coords)
+      const rect = win.getBoundingClientRect();
       win._preMaxRect = {
-        left: win.style.left,
-        top: win.style.top,
-        width: win.style.width,
-        height: win.style.height
+        left:      rect.left,
+        top:       rect.top,
+        width:     rect.width,
+        height:    rect.height,
+        transform: win.style.transform
       };
+
+      // Maximize: fill the desktop area (full viewport minus taskbar height ~30px)
+      const taskbarH = 30;
+      win.style.transform = 'none';
+      win.style.left      = '0px';
+      win.style.top       = '0px';
+      win.style.width     = window.innerWidth + 'px';
+      win.style.height    = (window.innerHeight - taskbarH) + 'px';
+      win.style.maxWidth  = '100vw';
+      win.style.maxHeight = '100vh';
       win.classList.add('maximized');
     }
   }

@@ -205,16 +205,16 @@
        DESKTOP ICONS
        ============================================ -->
       <div class="desktop-icons">
-        <!-- Mijn Diensten -->
-        <a class="desktop-icon" tabindex="0" data-target="diensten.html">
+        <!-- MNRV Studio (consolidated: Diensten + Portfolio + Webshop) -->
+        <div class="desktop-icon" tabindex="0" data-window="studio-window">
           <img
             class="icon-img"
-            src="assets/icons/w98_ProgramManager_32x32_4.png"
-            alt="Mijn Diensten"
+            src="assets/icons/w98_ConnectedWorld_32x32_4.png"
+            alt="MNRV Studio"
             draggable="false"
           />
-          <span class="icon-label">Mijn Diensten</span>
-        </a>
+          <span class="icon-label">MNRV Studio</span>
+        </div>
 
         <!-- Over MNRV -->
         <a class="desktop-icon" tabindex="0" data-target="over-ons.html">
@@ -238,17 +238,6 @@
           <span class="icon-label">Contact</span>
         </a>
 
-        <!-- Webshop -->
-        <a class="desktop-icon" tabindex="0" data-target="webshop.html">
-          <img
-            class="icon-img"
-            src="assets/icons/w98_ComputerExplorer_32x32_4.png"
-            alt="Webshop"
-            draggable="false"
-          />
-          <span class="icon-label">Webshop</span>
-        </a>
-
         <!-- Minesweeper -->
         <a class="desktop-icon" tabindex="0" data-target="minesweeper.html">
           <img
@@ -260,7 +249,7 @@
           <span class="icon-label">Mijnenveger</span>
         </a>
 
-        <!-- Word 95 -->
+        <!-- Word -->
         <div class="desktop-icon" tabindex="0" data-window="word-window">
           <img
             class="icon-img"
@@ -280,17 +269,6 @@
             draggable="false"
           />
           <span class="icon-label">Internet Explorer</span>
-        </div>
-
-        <!-- Portfolio / Apps Showcase -->
-        <div class="desktop-icon" tabindex="0" data-window="apps-window">
-          <img
-            class="icon-img"
-            src="assets/icons/w98_ConnectedWorld_32x32_4.png"
-            alt="Portfolio"
-            draggable="false"
-          />
-          <span class="icon-label">Portfolio</span>
         </div>
 
         <!-- Prullenbak -->
@@ -626,116 +604,246 @@
       </div>
 
       <!-- ============================================
-       APPS SHOWCASE WINDOW (Portfolio)
+       MNRV STUDIO WINDOW
        ============================================ -->
       <div
-        id="apps-window"
-        class="win-window hidden w-820 h-540 position-center"
+        id="studio-window"
+        class="win-window hidden position-center studio-window"
       >
+        <!-- Title bar -->
         <div class="win-titlebar">
           <img
             class="win-titlebar-icon"
-            src="assets/icons/w98_World_16x16_4.png"
-            alt="Apps"
+            src="assets/icons/w98_ConnectedWorld_16x16_4.png"
+            alt="Studio"
             draggable="false"
           />
-          <span class="win-titlebar-title">MNRV Portfolio - App Showcase</span>
+          <span class="win-titlebar-title">MNRV Studio — Portfolio &amp; Diensten</span>
           <div class="win-titlebar-buttons">
-            <button class="win-titlebar-btn min-btn" title="Minimaliseren">
-              _
-            </button>
-            <button class="win-titlebar-btn max-btn" title="Maximaliseren">
-              &#9633;
-            </button>
-            <button class="win-titlebar-btn close-btn" title="Sluiten">
-              X
-            </button>
+            <button class="win-titlebar-btn min-btn" title="Minimaliseren">_</button>
+            <button class="win-titlebar-btn max-btn" title="Maximaliseren">&#9633;</button>
+            <button class="win-titlebar-btn close-btn" title="Sluiten">X</button>
           </div>
         </div>
-        <!-- App navigation toolbar -->
-        <div class="apps-toolbar">
-          <button class="apps-nav-btn" id="apps-prev" title="Vorige app">
-            &#9664;
-          </button>
-          <div class="apps-tabs" id="apps-tabs">
-            <button class="apps-tab active" data-index="0">
-              <span class="apps-tab-icon">&#127912;</span>
-              <span class="apps-tab-label">D-Cor Vision AI</span>
-            </button>
-            <button class="apps-tab" data-index="1">
-              <span class="apps-tab-icon">&#127925;</span>
-              <span class="apps-tab-label">Windofy</span>
-            </button>
-            <button class="apps-tab" data-index="2">
-              <span class="apps-tab-icon">&#127864;</span>
-              <span class="apps-tab-label">Cocktails for Hire</span>
-            </button>
-            <button class="apps-tab" data-index="3">
-              <span class="apps-tab-icon">&#128200;</span>
-              <span class="apps-tab-label">CRM Systeem</span>
-            </button>
-            <button class="apps-tab" data-index="4">
-              <span class="apps-tab-icon">&#128197;</span>
-              <span class="apps-tab-label">PowerPlanner</span>
-            </button>
-            <button class="apps-tab" data-index="5">
-              <span class="apps-tab-icon">&#128513;</span>
-              <span class="apps-tab-label">SwapSmoel</span>
-            </button>
-          </div>
-          <button class="apps-nav-btn" id="apps-next" title="Volgende app">
-            &#9654;
-          </button>
-        </div>
-        <!-- App address bar -->
-        <div class="win-addressbar">
-          <label>Adres:</label>
-          <input
-            type="text"
-            id="apps-address"
-            value="https://d-cor-vision-ai-782596882622.us-west1.run.app"
-            readonly
-            class="win-input"
-            title="App adres"
-            placeholder="Adres"
-          />
-          <button
-            class="win-btn btn-sm"
-            onclick="
-              window.open(
-                document.getElementById('apps-address').value,
-                '_blank',
-              )
-            "
-          >
-            &#10138;
-          </button>
-        </div>
-        <!-- Iframe container -->
-        <div class="apps-iframe-container">
-          <div class="apps-loading" id="apps-loading">
-            <div class="apps-loading-icon">&#9201;</div>
-            <span>Laden...</span>
-            <div class="win-progress w-200 mt-8">
-              <div class="win-progress-bar apps-progress-bar"></div>
+        <!-- Resize handles -->
+        <div class="win-resize win-resize-n"></div>
+        <div class="win-resize win-resize-s"></div>
+        <div class="win-resize win-resize-e"></div>
+        <div class="win-resize win-resize-w"></div>
+        <div class="win-resize win-resize-nw"></div>
+        <div class="win-resize win-resize-ne"></div>
+        <div class="win-resize win-resize-sw"></div>
+        <div class="win-resize win-resize-se"></div>
+        <!-- Studio layout -->
+        <div class="studio-layout">
+          <!-- Sidebar -->
+          <nav class="studio-sidebar" id="studio-sidebar">
+            <div class="studio-sidebar-header">
+              <span class="studio-sidebar-logo">MNRV</span>
+              <span class="studio-sidebar-sub">Studio</span>
             </div>
+            <ul class="studio-nav" id="studio-nav">
+              <li class="studio-nav-item active" data-project="fainl">
+                <span class="studio-nav-emoji">🤖</span>
+                <span class="studio-nav-label">FAINL</span>
+                <span class="studio-nav-badge">AI</span>
+              </li>
+              <li class="studio-nav-item" data-project="dcor">
+                <span class="studio-nav-emoji">🏠</span>
+                <span class="studio-nav-label">D-Cor Vision AI</span>
+                <span class="studio-nav-badge">AI</span>
+              </li>
+              <li class="studio-nav-item" data-project="sjeek">
+                <span class="studio-nav-emoji">🍹</span>
+                <span class="studio-nav-label">Sjeek &amp; Cocktails</span>
+                <span class="studio-nav-badge">SaaS</span>
+              </li>
+              <li class="studio-nav-item" data-project="diensten">
+                <span class="studio-nav-emoji">✨</span>
+                <span class="studio-nav-label">Wat bouw ik?</span>
+                <span class="studio-nav-badge studio-nav-badge--cta">CTA</span>
+              </li>
+            </ul>
+            <div class="studio-sidebar-footer">
+              <a href="contact.html" class="studio-sidebar-cta-link">📩 Plan een gesprek</a>
+            </div>
+          </nav>
+
+          <!-- Main panel -->
+          <div class="studio-main" id="studio-main">
+
+            <!-- ===== PROJECT: FAINL ===== -->
+            <div class="studio-project active" id="project-fainl">
+              <!-- Sub-toggle bar (single URL, so hidden toggle) -->
+              <div class="studio-iframe-wrap">
+                <div class="studio-loading" id="loading-fainl">
+                  <div class="studio-loading-spinner"></div>
+                  <span>Laden...</span>
+                </div>
+                <iframe
+                  id="iframe-fainl"
+                  class="studio-iframe"
+                  src="about:blank"
+                  data-src="https://www.fainl.com"
+                  allow="fullscreen"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                  title="FAINL"
+                ></iframe>
+              </div>
+              <div class="studio-desc">
+                <div class="studio-desc-head">
+                  <div>
+                    <span class="studio-desc-tag">AI &bull; Multi-Node Deliberation</span>
+                    <h2 class="studio-desc-title">FAINL — Hooggerechtshof van Intelligentie</h2>
+                  </div>
+                  <a href="https://www.fainl.com" target="_blank" rel="noopener" class="studio-open-btn" title="Open in nieuw tabblad">&#8599;</a>
+                </div>
+                <ul class="studio-desc-bullets">
+                  <li>&#9654; Adversariële multi-node AI: meerdere intelligente persona's botsen &amp; debatteren jouw vraag.</li>
+                  <li>&#9654; Geconsolideerd Oordeel — jouw antwoord is getoetst door een privéraad van topspecialisten.</li>
+                  <li>&#9654; Elimineert hallucinaties en bias via realtime peer-review &amp; logische beproeving.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ===== PROJECT: D-COR VISION AI ===== -->
+            <div class="studio-project" id="project-dcor">
+              <div class="studio-iframe-wrap">
+                <div class="studio-loading" id="loading-dcor">
+                  <div class="studio-loading-spinner"></div>
+                  <span>Laden...</span>
+                </div>
+                <iframe
+                  id="iframe-dcor"
+                  class="studio-iframe"
+                  src="about:blank"
+                  data-src="https://d-cor-vision-ai-782596882622.us-west1.run.app/"
+                  allow="fullscreen"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                  title="D-Cor Vision AI"
+                ></iframe>
+              </div>
+              <div class="studio-desc">
+                <div class="studio-desc-head">
+                  <div>
+                    <span class="studio-desc-tag">AI &bull; Interior Design</span>
+                    <h2 class="studio-desc-title">D-Cor Vision AI — Jouw Ruimte, Opnieuw Uitgevonden</h2>
+                  </div>
+                  <a href="https://d-cor-vision-ai-782596882622.us-west1.run.app/" target="_blank" rel="noopener" class="studio-open-btn" title="Open in nieuw tabblad">&#8599;</a>
+                </div>
+                <ul class="studio-desc-bullets">
+                  <li>&#9654; AI decodeert de architectonische DNA van jouw ruimte — licht, kleur &amp; structuur tegelijk.</li>
+                  <li>&#9654; Van smartphone-foto naar hoogwaardige 3D-visualisatie: renovatiezekerheid vóór de eerste euro.</li>
+                  <li>&#9654; Democratiseert high-end interieurdesign: de ogen van een architect in jouw zak.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ===== PROJECT: SJEEK + COCKTAILS ===== -->
+            <div class="studio-project" id="project-sjeek">
+              <!-- Sub-toggle: Sjeek vs Cocktails for Hire -->
+              <div class="studio-subtabs" id="sjeek-subtabs">
+                <button class="studio-subtab active" data-sub="sjeek">🍹 Sjeek App</button>
+                <button class="studio-subtab" data-sub="cocktails">🍸 Cocktails for Hire</button>
+              </div>
+              <div class="studio-iframe-wrap">
+                <div class="studio-loading" id="loading-sjeek">
+                  <div class="studio-loading-spinner"></div>
+                  <span>Laden...</span>
+                </div>
+                <iframe
+                  id="iframe-sjeek"
+                  class="studio-iframe"
+                  src="about:blank"
+                  data-src="https://sjeek.nl"
+                  allow="fullscreen"
+                  sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                  title="Sjeek"
+                ></iframe>
+              </div>
+              <div class="studio-desc">
+                <div class="studio-desc-head">
+                  <div>
+                    <span class="studio-desc-tag" id="sjeek-tag">App &bull; Mixology SaaS</span>
+                    <h2 class="studio-desc-title" id="sjeek-title">Sjeek — Liquid Intelligence</h2>
+                  </div>
+                  <a id="sjeek-open-btn" href="https://sjeek.nl" target="_blank" rel="noopener" class="studio-open-btn" title="Open in nieuw tabblad">&#8599;</a>
+                </div>
+                <ul class="studio-desc-bullets" id="sjeek-bullets">
+                  <li>&#9654; AI-bartender analyseert jouw kastinhoud &amp; smaakprofiel — altijd het perfecte drankje.</li>
+                  <li>&#9654; Groeit mee: van lichte mocktail overdag tot complexe signatuurcocktail bij een dinerdiner.</li>
+                  <li>&#9654; Liquid Intelligence: begrijp het karakter van een drankje, volg geen recepten blindelings.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- ===== PROJECT: DIENSTEN ===== -->
+            <div class="studio-project" id="project-diensten">
+              <div class="studio-services-panel">
+                <div class="studio-services-header">
+                  <h2 class="studio-services-title">Wat bouw ik voor jou?</h2>
+                  <p class="studio-services-sub">Van ruwe visie naar schaalbaar product — MNRV levert van concept tot livegang.</p>
+                </div>
+                <div class="studio-services-grid">
+                  <div class="studio-service-card">
+                    <span class="studio-service-icon">🤖</span>
+                    <h3>AI Agents &amp; Chatbots</h3>
+                    <p>Intelligente agents die 24/7 klanten helpen, converteren en leren van elke interactie.</p>
+                  </div>
+                  <div class="studio-service-card">
+                    <span class="studio-service-icon">🛒</span>
+                    <h3>AI-Gedreven Webshops</h3>
+                    <p>Gepersonaliseerde e-commerce met productaanbevelingen, slimme zoekfuncties en conversie-AI.</p>
+                  </div>
+                  <div class="studio-service-card">
+                    <span class="studio-service-icon">📐</span>
+                    <h3>UX &amp; Interface Design</h3>
+                    <p>Data-gedreven ontwerpen die bezoekers omzetten in klanten. Beautifully functional.</p>
+                  </div>
+                  <div class="studio-service-card">
+                    <span class="studio-service-icon">⚡</span>
+                    <h3>Workflow Automation</h3>
+                    <p>Verbind tools, elimineer handmatig werk en laat AI de repetitieve taken overnemen.</p>
+                  </div>
+                  <div class="studio-service-card">
+                    <span class="studio-service-icon">📱</span>
+                    <h3>Web &amp; SaaS Apps</h3>
+                    <p>Van MVP tot schaalbare SaaS — gebouwd met de moderne stack die je concurrentie nog niet heeft.</p>
+                  </div>
+                  <div class="studio-service-card">
+                    <span class="studio-service-icon">🎨</span>
+                    <h3>Brand &amp; Visual Identity</h3>
+                    <p>Logo, huisstijl, motion design — een visuele taal die direct vertrouwen wekt en blijft hangen.</p>
+                  </div>
+                  <div class="studio-service-card">
+                    <span class="studio-service-icon">📊</span>
+                    <h3>Data &amp; Analytics</h3>
+                    <p>Van ruwe data naar bruikbare inzichten. Dashboards die strategische beslissingen versnellen.</p>
+                  </div>
+                </div>
+                <div class="studio-services-cta">
+                  <p class="studio-services-cta-text">Klaar om jouw visie werkelijkheid te maken?</p>
+                  <a href="contact.html" class="studio-cta-primary">🚀 Plan een Gesprek — Gratis Intake</a>
+                  <a href="mailto:info@mnrv.nl" class="studio-cta-secondary">✉ info@mnrv.nl</a>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <iframe
-            id="apps-iframe"
-            class="apps-iframe"
-            src="about:blank"
-            allowfullscreen
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"
-            title="App showcase iframe"
-          ></iframe>
+          <!-- /.studio-main -->
         </div>
-        <!-- Status bar -->
-        <div class="win-statusbar">
-          <span class="win-statusbar-section" id="apps-status">Gereed</span>
-          <span class="win-statusbar-section" id="apps-counter">1 / 6</span>
-          <span class="win-statusbar-section">Internet</span>
+        <!-- /.studio-layout -->
+
+        <!-- Sticky CTA bar (bottom) -->
+        <div class="studio-cta-bar">
+          <span class="studio-cta-bar-copy">Klaar om te bouwen?</span>
+          <a href="contact.html" class="studio-cta-primary studio-cta-primary--sm">🚀 Plan een Gesprek</a>
+          <a href="mailto:info@mnrv.nl" class="studio-cta-secondary studio-cta-secondary--sm">✉ Mail mij</a>
+          <span class="studio-cta-bar-tagline">MNRV · AI &amp; Digital Studio</span>
         </div>
+
       </div>
+      <!-- /#studio-window -->
     </div>
     <!-- /.desktop -->
 
@@ -918,33 +1026,12 @@
         <span>MNRV<em class="start-menu-mnrv98"> 98</em></span>
       </div>
       <div class="start-menu-items">
-        <a class="start-menu-item" href="diensten.html">
-          <img
-            src="assets/icons/w98_ProgramManager_32x32_4.png"
-            alt=""
-            draggable="false"
-          />
-          <span>Diensten</span>
-        </a>
-        <a class="start-menu-item" href="webshop.html">
-          <img
-            src="assets/icons/w98_World_32x32_4.png"
-            alt=""
-            draggable="false"
-          />
-          <span>Webshop</span>
-        </a>
         <div
           class="start-menu-item"
-          onclick="
-            if (window.MNRV) {
-              window.MNRV.showWindow('apps-window');
-              window.MNRV.closeStartMenu();
-            }
-          "
+          onclick="if(window.MNRV){window.MNRV.showWindow('studio-window');window.MNRV.closeStartMenu();}"
         >
-          <img src="assets/icons/Globe_32x32_4.png" alt="" draggable="false" />
-          <span>Portfolio</span>
+          <img src="assets/icons/w98_ConnectedWorld_32x32_4.png" alt="" draggable="false" />
+          <span>MNRV Studio</span>
         </div>
         <div class="start-menu-separator"></div>
         <a class="start-menu-item" href="over-ons.html">
@@ -1701,6 +1788,140 @@
             e.preventDefault();
           }
         });
+      })();
+    </script>
+
+    <script>
+      /* ============================================
+         MNRV STUDIO WINDOW CONTROLLER
+         ============================================ */
+      (function () {
+        var studioWindow = document.getElementById('studio-window');
+        if (!studioWindow) return;
+
+        /* ---------- project data ---------- */
+        var sjeekData = {
+          sjeek: {
+            src: 'https://sjeek.nl',
+            tag: 'App \u2022 Mixology SaaS',
+            title: 'Sjeek \u2014 Liquid Intelligence',
+            openHref: 'https://sjeek.nl',
+            bullets: [
+              '\u25b6 AI-bartender analyseert jouw kastinhoud & smaakprofiel \u2014 altijd het perfecte drankje.',
+              '\u25b6 Groeit mee: van lichte mocktail overdag tot complexe signatuurcocktail in de avond.',
+              '\u25b6 Liquid Intelligence: begrijp het karakter van een drankje \u2014 geen blinde receptenvolgmachines.'
+            ]
+          },
+          cocktails: {
+            src: 'https://cocktailsforhire.nl',
+            tag: 'Web \u2022 Brand + Booking',
+            title: 'Cocktails for Hire \u2014 Professionele Mixologie aan Huis',
+            openHref: 'https://cocktailsforhire.nl',
+            bullets: [
+              '\u25b6 Professionele barworkshops & catering voor priv\u00e9 evenementen op jouw locatie.',
+              '\u25b6 Op maat gegenereerde cocktailmenu\u2019s per gelegenheid \u2014 via AI of persoonlijk advies.',
+              '\u25b6 De kloof tussen exclusieve bar-ervaring en thuissetting: definitief gedicht.'
+            ]
+          }
+        };
+
+        /* ---------- nav switching ---------- */
+        var navItems = studioWindow.querySelectorAll('.studio-nav-item');
+        var projects = studioWindow.querySelectorAll('.studio-project');
+
+        function activateProject(id) {
+          navItems.forEach(function (item) {
+            item.classList.toggle('active', item.getAttribute('data-project') === id);
+          });
+          projects.forEach(function (p) {
+            var isActive = p.id === 'project-' + id;
+            p.classList.toggle('active', isActive);
+            if (isActive) {
+              // Lazy-load the iframe for this project
+              var iframe = p.querySelector('.studio-iframe');
+              if (iframe && iframe.getAttribute('data-src') && iframe.src === 'about:blank') {
+                var loading = p.querySelector('.studio-loading');
+                if (loading) loading.classList.remove('hidden');
+                iframe.src = iframe.getAttribute('data-src');
+                iframe.addEventListener('load', function () {
+                  if (loading) loading.classList.add('hidden');
+                }, { once: true });
+                iframe.addEventListener('error', function () {
+                  if (loading) loading.classList.add('hidden');
+                }, { once: true });
+              }
+            }
+          });
+        }
+
+        navItems.forEach(function (item) {
+          item.addEventListener('click', function () {
+            activateProject(item.getAttribute('data-project'));
+          });
+        });
+
+        /* ---------- Sjeek subtabs ---------- */
+        var sjeekSubtabs = studioWindow.querySelectorAll('.studio-subtab');
+        var sjeekIframe  = document.getElementById('iframe-sjeek');
+        var sjeekLoading = document.getElementById('loading-sjeek');
+        var sjeekTag     = document.getElementById('sjeek-tag');
+        var sjeekTitle   = document.getElementById('sjeek-title');
+        var sjeekOpenBtn = document.getElementById('sjeek-open-btn');
+        var sjeekBullets = document.getElementById('sjeek-bullets');
+
+        var currentSub = 'sjeek';
+
+        function activateSub(sub) {
+          if (sub === currentSub) return;
+          currentSub = sub;
+          var data = sjeekData[sub];
+
+          sjeekSubtabs.forEach(function (btn) {
+            btn.classList.toggle('active', btn.getAttribute('data-sub') === sub);
+          });
+
+          // Update meta
+          if (sjeekTag) sjeekTag.textContent = data.tag;
+          if (sjeekTitle) sjeekTitle.textContent = data.title;
+          if (sjeekOpenBtn) {
+            sjeekOpenBtn.href = data.openHref;
+            sjeekOpenBtn.title = 'Open in nieuw tabblad';
+          }
+          if (sjeekBullets) {
+            sjeekBullets.innerHTML = data.bullets.map(function (b) {
+              return '<li>' + b + '</li>';
+            }).join('');
+          }
+
+          // Swap iframe
+          if (sjeekIframe) {
+            if (sjeekLoading) sjeekLoading.classList.remove('hidden');
+            sjeekIframe.src = data.src;
+            sjeekIframe.addEventListener('load', function () {
+              if (sjeekLoading) sjeekLoading.classList.add('hidden');
+            }, { once: true });
+          }
+        }
+
+        sjeekSubtabs.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            activateSub(btn.getAttribute('data-sub'));
+          });
+        });
+
+        /* ---------- Auto-load FAINL when studio window opens ---------- */
+        var observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (m) {
+            if (m.attributeName === 'class' && !studioWindow.classList.contains('hidden')) {
+              // Activate FAINL (first project) if nothing else is active
+              var activeNav = studioWindow.querySelector('.studio-nav-item.active');
+              var projectId = activeNav ? activeNav.getAttribute('data-project') : 'fainl';
+              activateProject(projectId);
+            }
+          });
+        });
+        observer.observe(studioWindow, { attributes: true });
+
       })();
     </script>
   </body>
